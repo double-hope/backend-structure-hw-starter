@@ -1,6 +1,6 @@
-import {db, statEmitter} from "../../index";
-import {changeArrayElems} from "../../helpers/arrayHelper";
-import {returnError} from "./return-error";
+import { db, statEmitter } from '../../index';
+import { changeArrayElems } from '../../helpers/arrayHelper';
+import { returnError } from './return-error';
 
 export const betsService = (req, res, userId) => {
     req.body.event_id = req.body.eventId;

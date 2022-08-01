@@ -27,8 +27,7 @@ router
 
         res.send(stats);
     } catch (err) {
-        console.log(err);
-        res.status(500).send('Internal Server Error');
+        returnError(res, 500, 'Internal Server Error');
     }
 });
 

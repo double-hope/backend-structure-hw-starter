@@ -8,6 +8,7 @@ export const app = express();
 const port = 3000;
 export const statEmitter = new ee();
 export let db;
+
 export const stats = {
   totalUsers: 3,
   totalBets: 1,

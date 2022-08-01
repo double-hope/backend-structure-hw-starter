@@ -33,9 +33,7 @@ router
 
             eventPostService(req, res);
         } catch (err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-
+            returnError(res, 500, 'Internal Server Error');
         }
     });
 
@@ -43,17 +41,18 @@ router
     .put('/:id', (req, res) => {
         const schema = createScoreSchema();
 
-        const isValidResult = schema.validate(req.body);
-        if(isValidResult.error) {
-            res.status(400).send({ error: isValidResult.error.details[0].message });
+        checkValidation(schema, req.body, res);
+
+        if(res.statusCode === 400)
             return;
-        }
 
         try {
             let token = req.headers['authorization'];
+
             if(!token) {
                 return returnError(res, 401, 'Not Authorized');
             }
+
             token = token.replace('Bearer ', '');
             try {
                 const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);

@@ -9,8 +9,8 @@ const router = Router();
 
 router
     .post('/', (req, res) => {
-    const schema = createBetsSchema();
-    checkValidation(schema, req.body, res);
+
+        checkValidation(createBetsSchema(), req.body, res);
 
     if(res.statusCode === 400)
         return;
@@ -24,12 +24,12 @@ router
         }
         
         token = token.replace('Bearer ', '');
+
         try {
             const tokenPayload = jwt.verify(token, process.env.JWT_SECRET);
             userId = tokenPayload.id;
         } catch (err) {
-            console.log(err);
-            return res.status(401).send({ error: 'Not Authorized' });
+            return returnError(res, 401, 'Not Authorized')
         }
 
         betsService(req, res, userId);
