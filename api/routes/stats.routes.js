@@ -1,17 +1,17 @@
-import {Router} from "express";
-import jwt from "jsonwebtoken";
-import {stats} from "../../index";
-import {checkAuthorized} from "../middleware/authorized-handler";
-import {returnNotAuthError} from "../services/return-error";
+import { Router } from 'express';
+import jwt from 'jsonwebtoken';
+import { stats } from '../../index';
+import { checkAuthorized } from '../middleware/authorized-handler';
+import { returnError } from '../services/return-error';
 
 const router = Router();
 
 router
-    .get("/", checkAuthorized, (req, res) => {
+    .get('/', checkAuthorized, (req, res) => {
     try {
 
         if(!req.authorize) {
-            return returnNotAuthError(res, 'Not Authorized');
+            return returnError(res, 401, 'Not Authorized');
         }
 
         const token = req.headers['authorization'].replace('Bearer ', '');
@@ -22,13 +22,13 @@ router
                 new Error();
             }
         } catch (err) {
-            return returnNotAuthError(res, 'Not Authorized');
+            return returnError(res, 401, 'Not Authorized');
         }
 
         res.send(stats);
     } catch (err) {
         console.log(err);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send('Internal Server Error');
     }
 });
 

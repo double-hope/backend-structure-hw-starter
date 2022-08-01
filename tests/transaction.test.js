@@ -1,16 +1,16 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const jwt = require("jsonwebtoken");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const jwt = require('jsonwebtoken');
 
-const { app } = require("../index");
+const { app } = require('../index');
 const { expect } = chai;
 
 console.log = () => {};
 
 chai.use(chaiHttp);
 
-describe("/transactions route", () => {
-  describe("POST /", async () => {
+describe('/transactions route', () => {
+  describe('POST /", async () => {
     it("should create new transaction", async () => {
       const data = {
         userId: "c486ab55-5c4b-4689-8f57-ace155ea65b4",

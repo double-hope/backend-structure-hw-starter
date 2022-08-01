@@ -1,6 +1,6 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-const jwt = require("jsonwebtoken");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const jwt = require('jsonwebtoken');
 
 const { app } = require("../index");
 const { expect } = chai;
